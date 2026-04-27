@@ -1,52 +1,26 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import api from '../services/api'
+import { createContext, useContext, useState } from 'react'
 
-const AuthContext = createContext(null)
+const AuthContext = createContext()
 
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      api.get('/users/me')
-        .then(res => setUser(res.data))
-        .catch(() => localStorage.removeItem('token'))
-        .finally(() => setLoading(false))
-    } else {
-      setLoading(false)
-    }
-  }, [])
-
-  const login = async (email, password) => {
-    const res = await api.post('/users/login', { email, password })
-    localStorage.setItem('token', res.data.token)
-    setUser(res.data.user)
-    return res.data
+  const login = (userData) => {
+    setUser(userData)
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
     setUser(null)
   }
 
-  const register = async (userData) => {
-    const res = await api.post('/users/register', userData)
-    localStorage.setItem('token', res.data.token)
-    setUser(res.data.user)
-    return res.data
-  }
-
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
+// optional helper hook
 export const useAuth = () => {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
-  return ctx
+  return useContext(AuthContext)
 }
