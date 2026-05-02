@@ -1,59 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FaArrowRight,
   FaCheckCircle,
-  FaUserNurse,
-  FaBookMedical,
-  FaGraduationCap,
-  FaStethoscope,
   FaHeartbeat,
+  FaUserNurse,
 } from "react-icons/fa";
+import ApplyModal from "../components/ApplyModal";
 
-const HERO_VIDEO =
-  "https://videos.pexels.com/video-files/855480/855480-hd_1920_1080_25fps.mp4";
-
+const HERO_VIDEO = "/images/jrp_video.mp4";
 const HERO_FALLBACK =
-  "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1200";
+  "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1400";
 
 const images = {
-  campus:
-    "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  lab:
-    "https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1200",
   students:
     "https://images.pexels.com/photos/5214961/pexels-photo-5214961.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  lab:
+    "https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1200",
   hospital:
     "https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg?auto=compress&cs=tinysrgb&w=1200",
 };
-
-const courses = [
-  {
-    title: "B.Sc. Nursing",
-    duration: "4 Years",
-    icon: <FaStethoscope />,
-    desc: "Complete undergraduate nursing program with clinical exposure.",
-  },
-  {
-    title: "P.B. B.Sc. Nursing",
-    duration: "2 Years",
-    icon: <FaBookMedical />,
-    desc: "Upgrade program for diploma nursing students.",
-  },
-  {
-    title: "M.Sc. Nursing",
-    duration: "2 Years",
-    icon: <FaGraduationCap />,
-    desc: "Advanced nursing program with leadership and research.",
-  },
-  {
-    title: "G.N.M. Nursing",
-    duration: "3 Years",
-    icon: <FaUserNurse />,
-    desc: "Diploma program focused on practical patient care.",
-  },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -61,108 +28,93 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const [openApplyModal, setOpenApplyModal] = useState(false);
+
+  const openModal = () => setOpenApplyModal(true);
+
   return (
     <div className="bg-[#f8fbff] overflow-hidden text-slate-800">
-      {/* HERO */}
-      <section className="relative pt-32 pb-28 bg-gradient-to-br from-blue-50 via-white to-green-50">
-        <div className="absolute top-20 left-8 w-80 h-80 bg-blue-200/40 rounded-full blur-3xl" />
-        <div className="absolute bottom-16 right-8 w-96 h-96 bg-green-200/50 rounded-full blur-3xl" />
+      {/* HERO WITH VIDEO BACKGROUND */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        <video
+          src={HERO_VIDEO}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.95fr_1.05fr] gap-14 items-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-900/75 to-green-900/40" />
+        <div className="absolute inset-0 bg-black/15" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 w-full">
           <motion.div
             initial="hidden"
             animate="show"
             variants={fadeUp}
             transition={{ duration: 0.8 }}
+            className="max-w-3xl text-white"
           >
-            <span className="inline-flex items-center gap-2 bg-white px-5 py-2 rounded-full shadow-md text-green-700 font-bold text-xs tracking-widest uppercase">
+            <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-5 py-2 rounded-full text-green-300 font-bold text-xs tracking-widest uppercase border border-white/20">
               <FaHeartbeat />
               Compassion • Care • Career
             </span>
 
-            <h1 className="mt-6 text-5xl md:text-7xl font-extrabold text-blue-900 leading-tight">
-              Shaping Nurses <br />
-              Who Care, Serve <br />
-              and Lead
+            <h1 className="mt-6 text-5xl md:text-7xl font-extrabold leading-tight">
+              Building Skilled <br />
+              G.N.M. Nurses <br />
+              with Excellence
             </h1>
 
-            <p className="mt-6 text-gray-600 text-lg leading-8 max-w-xl">
-              A modern nursing college experience with clinical practice,
-              expert faculty, trusted approvals, and career-focused learning.
+            <p className="mt-6 text-blue-50 text-lg leading-8 max-w-xl">
+              A professional nursing institute focused on G.N.M. Nursing,
+              clinical practice, patient care skills, discipline, and healthcare
+              career growth.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/courses"
-                className="bg-green-600 hover:bg-green-700 text-white px-7 py-4 rounded-full font-bold shadow-lg inline-flex items-center gap-2 transition"
+              <button
+                onClick={openModal}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-lg inline-flex items-center gap-2 transition"
               >
-                Explore Courses <FaArrowRight />
-              </Link>
+                Apply Now <FaArrowRight />
+              </button>
 
               <Link
-                to="/apply"
-                className="bg-white border border-blue-700 text-blue-800 px-7 py-4 rounded-full font-bold shadow-md hover:bg-blue-900 hover:text-white transition"
+                to="/contact"
+                className="bg-white text-blue-900 px-8 py-4 rounded-full font-bold shadow-lg hover:bg-blue-50 transition"
               >
-                Apply Now
+                Contact Admission Office
               </Link>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.88, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="relative"
-          >
-            <div className="absolute -inset-5 bg-gradient-to-r from-blue-300 to-green-300 rounded-[3.5rem] blur-2xl opacity-50" />
-
-            <div className="relative bg-white p-4 rounded-[3.5rem] shadow-2xl">
-              <video
-                src={HERO_VIDEO}
-                poster={HERO_FALLBACK}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                  e.currentTarget.nextElementSibling.style.display = "block";
-                }}
-                className="w-full h-[500px] object-cover rounded-[3rem]"
-              />
-
-              <img
-                src={HERO_FALLBACK}
-                alt="Nursing students"
-                className="hidden w-full h-[500px] object-cover rounded-[3rem]"
-              />
-
-              <div className="absolute -bottom-8 left-8 right-8 bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl p-6 grid sm:grid-cols-3 gap-4">
-                {["INC Approved", "MUHS Affiliated", "Admissions 2026"].map(
-                  (item) => (
-                    <div key={item} className="text-center">
-                      <FaCheckCircle className="text-green-600 mx-auto mb-2" />
-                      <p className="text-sm font-extrabold text-blue-900">
-                        {item}
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
+            <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-2xl">
+              {["G.N.M. Nursing", "3 Years Program", "Admissions for 2026-27"].map(
+                (item) => (
+                  <div
+                    key={item}
+                    className="bg-white/15 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4"
+                  >
+                    <FaCheckCircle className="text-green-400 mb-2" />
+                    <p className="text-sm font-extrabold">{item}</p>
+                  </div>
+                )
+              )}
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* FEATURES */}
-      <section className="max-w-7xl mx-auto px-6 pt-20 pb-10">
+      <section className="relative z-20 -mt-16 max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-6">
           {[
-            ["01", "Expert Faculty"],
+            ["01", "G.N.M. Focused"],
             ["02", "Clinical Training"],
             ["03", "Modern Labs"],
-            ["04", "Placement Support"],
+            ["04", "Career Support"],
           ].map(([no, title], index) => (
             <motion.div
               key={title}
@@ -181,66 +133,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COURSES */}
-      <section className="relative py-24 bg-blue-950 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-20 bg-[#f8fbff] rounded-b-[60%]" />
-        <div className="absolute -top-20 right-10 w-96 h-96 bg-green-400/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
+      {/* GNM COURSE SECTION */}
+      <section className="py-24 max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
           <motion.div
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
+            initial={{ opacity: 0, x: -70 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
           >
-            <p className="text-green-400 font-bold uppercase tracking-widest">
-              Our Programs
+            <p className="text-green-600 font-bold uppercase tracking-widest">
+              Our Program
             </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-3">
-              Choose Your Nursing Path
+
+            <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900 mt-3 leading-tight">
+              G.N.M. Nursing
             </h2>
+
+            <p className="mt-6 text-gray-600 leading-8">
+              G.N.M. Nursing is a 3-year diploma program focused on practical
+              nursing care, hospital training, patient communication, and
+              professional healthcare service.
+            </p>
+
+            <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              {[
+                "Duration: 3 Years",
+                "Practical Nursing Training",
+                "Hospital Exposure",
+                "Patient Care Skills",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="bg-white p-5 rounded-2xl shadow-md border border-blue-50 flex gap-3 items-center"
+                >
+                  <FaCheckCircle className="text-green-600 shrink-0" />
+                  <span className="font-bold text-blue-900">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={openModal}
+              className="mt-8 inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-lg transition"
+            >
+              Apply for G.N.M. Nursing <FaArrowRight />
+            </button>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {courses.map((course, index) => (
-              <motion.div
-                key={course.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -70 : 70 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group bg-white/10 backdrop-blur-xl border border-white/15 rounded-[2rem] p-6 hover:bg-white hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="flex gap-5 items-start">
-                  <div className="w-20 h-20 rounded-2xl bg-white text-blue-900 flex items-center justify-center text-4xl">
-                    {course.icon}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="absolute -inset-5 bg-gradient-to-r from-blue-300 to-green-300 rounded-[3rem] blur-2xl opacity-40" />
+
+            <div className="relative bg-white rounded-[3rem] p-4 shadow-2xl">
+              <img
+                src={images.lab}
+                alt="G.N.M. Nursing practical training"
+                className="rounded-[2.4rem] h-[430px] w-full object-cover"
+              />
+
+              <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-xl">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-2xl">
+                    <FaUserNurse />
                   </div>
-
                   <div>
-                    <h3 className="text-2xl font-extrabold text-white group-hover:text-blue-900">
-                      {course.title}
+                    <h3 className="text-xl font-extrabold text-blue-900">
+                      Learn. Practice. Serve.
                     </h3>
-
-                    <p className="mt-2 text-green-300 font-bold group-hover:text-green-700">
-                      Duration: {course.duration}
+                    <p className="text-sm text-gray-600">
+                      Complete G.N.M. nursing preparation.
                     </p>
-
-                    <p className="mt-3 text-blue-100 leading-7 group-hover:text-gray-600">
-                      {course.desc}
-                    </p>
-
-                    <Link
-                      to="/courses"
-                      className="mt-5 inline-flex items-center gap-2 text-green-300 group-hover:text-blue-800 font-bold"
-                    >
-                      View Details <FaArrowRight />
-                    </Link>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -255,20 +226,20 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <p className="text-green-600 font-bold uppercase tracking-widest">
-              Nursing Journey
+              Student Journey
             </p>
 
             <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900 mt-3">
-              From Classroom to Healthcare Career
+              From Student to Professional Nurse
             </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              ["Learn", "Strong academic foundation."],
-              ["Practice", "Hands-on clinical training."],
-              ["Serve", "Build patient care confidence."],
-              ["Grow", "Career and placement support."],
+              ["Learn", "Build strong nursing knowledge."],
+              ["Practice", "Train in labs and hospitals."],
+              ["Serve", "Develop patient care confidence."],
+              ["Grow", "Prepare for healthcare career."],
             ].map(([title, desc], index) => (
               <motion.div
                 key={title}
@@ -293,7 +264,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT COLLAGE */}
+      {/* WHY CHOOSE US */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -303,23 +274,23 @@ export default function Home() {
             className="relative grid grid-cols-2 gap-4"
           >
             <img
-              src={images.campus}
-              alt="Campus"
+              src={images.students}
+              alt="Nursing students"
               className="rounded-[2rem] h-72 w-full object-cover shadow-xl"
             />
             <img
-              src={images.lab}
-              alt="Lab"
+              src={images.hospital}
+              alt="Hospital training"
               className="rounded-[2rem] h-52 w-full object-cover shadow-xl mt-14"
             />
             <img
-              src={images.students}
-              alt="Students"
+              src={images.lab}
+              alt="Nursing lab"
               className="rounded-[2rem] h-52 w-full object-cover shadow-xl"
             />
             <img
-              src={images.hospital}
-              alt="Hospital"
+              src={HERO_FALLBACK}
+              alt="Nursing college"
               className="rounded-[2rem] h-72 w-full object-cover shadow-xl -mt-6"
             />
           </motion.div>
@@ -334,20 +305,21 @@ export default function Home() {
             </p>
 
             <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900 mt-3 leading-tight">
-              A Calm, Caring and Professional Learning Environment
+              Focused Training for G.N.M. Nursing Students
             </h2>
 
             <p className="mt-6 text-gray-600 leading-8">
-              Our college focuses on academic excellence, real clinical exposure,
-              discipline, communication skills and confident healthcare service.
+              Our college provides a caring and disciplined environment where
+              students develop nursing knowledge, practical skills,
+              communication confidence, and professional healthcare values.
             </p>
 
             <div className="mt-8 space-y-4">
               {[
-                "Modern nursing labs with practical learning",
+                "Modern nursing labs for practical learning",
                 "Hospital exposure for real patient care",
                 "Experienced and supportive faculty",
-                "Career guidance and placement preparation",
+                "Admission and career guidance",
               ].map((item) => (
                 <div
                   key={item}
@@ -375,21 +347,21 @@ export default function Home() {
 
           <div className="relative z-10">
             <h2 className="text-4xl md:text-6xl font-extrabold text-white">
-              Start Your Nursing Career Today
+              Start Your G.N.M. Nursing Career Today
             </h2>
 
             <p className="mt-5 text-blue-50 max-w-2xl mx-auto leading-8">
               Join a trusted nursing institution focused on care, education,
-              clinical skills and professional growth.
+              clinical skills, and professional growth.
             </p>
 
             <div className="mt-8 flex justify-center gap-4 flex-wrap">
-              <Link
-                to="/apply"
+              <button
+                onClick={openModal}
                 className="bg-white text-blue-900 px-8 py-4 rounded-xl font-bold hover:scale-105 transition"
               >
                 Apply Now
-              </Link>
+              </button>
 
               <Link
                 to="/contact"
@@ -401,6 +373,11 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <ApplyModal
+        open={openApplyModal}
+        onClose={() => setOpenApplyModal(false)}
+      />
     </div>
   );
 }
