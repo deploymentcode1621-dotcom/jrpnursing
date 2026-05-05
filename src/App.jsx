@@ -1,14 +1,14 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import AppRoutes from './routes'
+import MainLayout from './layouts/MainLayout'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
-        <AppRoutes />
+        <MainLayout />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
