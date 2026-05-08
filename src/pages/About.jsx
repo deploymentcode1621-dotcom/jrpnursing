@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import ApplyModal from "../components/ApplyModal";
 
@@ -126,12 +126,26 @@ const faculty = [
 export default function About() {
   const [activeHospital, setActiveHospital] = useState(null);
   const [openApplyModal, setOpenApplyModal] = useState(false);
+  const location = useLocation();
 
   const openModal = () => setOpenApplyModal(true);
 
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const section = document.getElementById(id);
+
+      if (section) {
+        setTimeout(() => {
+          const y = section.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
+
   return (
     <div className="bg-[#f7fbfb] pt-20 overflow-hidden">
-      {/* SPLIT HERO */}
       <section className="relative bg-[#eef9f7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div variants={fadeLeft} initial="hidden" animate="show">
@@ -152,9 +166,7 @@ export default function About() {
             </p>
 
             <div className="flex items-center gap-2 text-sm">
-              <Link to="/" className="text-slate-500 hover:text-[#0f9f8f]">
-                Home
-              </Link>
+              <Link to="/" className="text-slate-500 hover:text-[#0f9f8f]">Home</Link>
               <span className="text-slate-400">/</span>
               <span className="font-bold text-[#102a43]">About Us</span>
             </div>
@@ -184,8 +196,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* INTRO + STATS */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="who-we-are" className="scroll-mt-28 py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -194,9 +205,7 @@ export default function About() {
           className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-8"
         >
           <div className="bg-white rounded-[2rem] p-8 sm:p-10 shadow-lg border border-[#dff3ee]">
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-4">
-              Who We Are
-            </p>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-4">Who We Are</p>
 
             <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-6">
               Dedicated to Shaping Future Healthcare Heroes
@@ -212,10 +221,7 @@ export default function About() {
 
             <div className="flex flex-wrap gap-3">
               {["INC Approved", "MUHS Affiliated", "GNM Nursing", "Clinical Training"].map((item) => (
-                <span
-                  key={item}
-                  className="bg-[#ecfdf5] text-[#0f766e] px-4 py-2 rounded-full text-xs font-black border border-[#b7f7e9]"
-                >
+                <span key={item} className="bg-[#ecfdf5] text-[#0f766e] px-4 py-2 rounded-full text-xs font-black border border-[#b7f7e9]">
                   {item}
                 </span>
               ))}
@@ -224,11 +230,7 @@ export default function About() {
 
           <div className="grid grid-cols-2 gap-4">
             {stats.map((s) => (
-              <motion.div
-                key={s.label}
-                whileHover={{ y: -8 }}
-                className="bg-white rounded-3xl p-6 shadow-md border border-[#dff3ee]"
-              >
+              <motion.div key={s.label} whileHover={{ y: -8 }} className="bg-white rounded-3xl p-6 shadow-md border border-[#dff3ee]">
                 <p className="text-3xl font-black text-[#0f9f8f]">{s.value}</p>
                 <p className="text-slate-500 text-xs font-bold mt-2">{s.label}</p>
               </motion.div>
@@ -237,8 +239,7 @@ export default function About() {
         </motion.div>
       </section>
 
-      {/* PRINCIPAL MESSAGE */}
-      <section className="py-20 bg-[#102a43]">
+      <section id="principal" className="scroll-mt-28 py-20 bg-[#102a43]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
           <motion.div
             variants={fadeLeft}
@@ -250,6 +251,7 @@ export default function About() {
             <div className="h-80 rounded-[1.5rem] bg-gradient-to-br from-[#dff3ee] to-[#dbeafe] flex items-center justify-center text-7xl font-black text-[#0f9f8f]">
               SP
             </div>
+
             <div className="pt-5 text-center">
               <h3 className="text-[#102a43] font-black text-xl">Dr. Sunita Patil</h3>
               <p className="text-[#0f9f8f] font-bold text-sm">Principal</p>
@@ -257,15 +259,8 @@ export default function About() {
             </div>
           </motion.div>
 
-          <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            <p className="text-[#7dd3c7] text-xs font-black tracking-[0.22em] uppercase mb-4">
-              Principal Message
-            </p>
+          <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <p className="text-[#7dd3c7] text-xs font-black tracking-[0.22em] uppercase mb-4">Principal Message</p>
 
             <h2 className="text-white text-3xl sm:text-4xl font-black mb-6">
               Education With Discipline, Care & Clinical Confidence
@@ -285,25 +280,14 @@ export default function About() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
-      <section className="py-20 bg-[#f7fbfb]">
+      <section id="why-us" className="scroll-mt-28 py-20 bg-[#f7fbfb]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-12">
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Why Choose Us
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">
-              A Professional Pathway Into Nursing
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Why Choose Us</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">A Professional Pathway Into Nursing</h2>
           </motion.div>
 
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="space-y-5"
-          >
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-5">
             {chooseUs.map((item) => (
               <motion.div
                 key={item.no}
@@ -322,16 +306,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="py-20 bg-white">
+      <section id="journey" className="scroll-mt-28 py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-14">
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Our Legacy
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">
-              33 Years of Shaping Nurses
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Our Legacy</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">33 Years of Shaping Nurses</h2>
           </motion.div>
 
           <div className="relative border-l-4 border-[#0f9f8f] pl-8 space-y-8">
@@ -356,16 +335,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* CLINICAL TRAINING */}
-      <section className="py-20 bg-[#eef9f7]">
+      <section id="clinical" className="scroll-mt-28 py-20 bg-[#eef9f7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
           <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Clinical Training
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-8">
-              Training Areas Covered
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Clinical Training</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-8">Training Areas Covered</h2>
 
             <div className="space-y-4">
               {clinicalAreas.map((area, index) => (
@@ -384,12 +358,8 @@ export default function About() {
           </motion.div>
 
           <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Hospital Affiliations
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-8">
-              Practical Exposure Network
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Hospital Affiliations</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-8">Practical Exposure Network</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {hospitals.map((h, i) => (
@@ -401,13 +371,8 @@ export default function About() {
                 >
                   <p className="font-black text-[#102a43] text-sm mb-2">{h.name}</p>
                   <p className="text-[#0f9f8f] text-xs font-bold">{h.type}</p>
-
                   {activeHospital === i && (
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-slate-500 text-xs mt-3"
-                    >
+                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-slate-500 text-xs mt-3">
                       Capacity: <b>{h.beds}</b>
                     </motion.p>
                   )}
@@ -418,32 +383,18 @@ export default function About() {
         </div>
       </section>
 
-      {/* VISION MISSION VALUES */}
-      <section className="py-20 bg-white">
+      <section id="vision" className="scroll-mt-28 py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-12">
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Our Foundation
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">
-              Vision, Mission & Values
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Our Foundation</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">Vision, Mission & Values</h2>
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              {
-                title: "Our Vision",
-                text: "To be a premier nursing institution recognized for academic excellence, clinical competence and compassionate care.",
-              },
-              {
-                title: "Our Mission",
-                text: "To deliver quality nursing education and healthcare services with compassion, integrity and excellence.",
-              },
-              {
-                title: "Our Values",
-                text: "Compassion, Integrity, Excellence, Teamwork, Innovation and Respect for human dignity guide every decision.",
-              },
+              { title: "Our Vision", text: "To be a premier nursing institution recognized for academic excellence, clinical competence and compassionate care." },
+              { title: "Our Mission", text: "To deliver quality nursing education and healthcare services with compassion, integrity and excellence." },
+              { title: "Our Values", text: "Compassion, Integrity, Excellence, Teamwork, Innovation and Respect for human dignity guide every decision." },
             ].map((item) => (
               <motion.div
                 key={item.title}
@@ -459,16 +410,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* FACULTY */}
-      <section className="py-20 bg-[#f7fbfb]">
+      <section id="faculty" className="scroll-mt-28 py-20 bg-[#f7fbfb]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-12">
-            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-              Our Faculty
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">
-              Meet Our Expert Team
-            </h2>
+            <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Our Faculty</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#102a43]">Meet Our Expert Team</h2>
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
@@ -492,7 +438,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-16 bg-[#eef9f7] px-4">
         <motion.div
           variants={fadeUp}
@@ -501,9 +446,7 @@ export default function About() {
           viewport={{ once: true }}
           className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-10 sm:p-14 shadow-xl border border-[#dff3ee] text-center"
         >
-          <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">
-            Admissions Open
-          </p>
+          <p className="text-[#0f9f8f] text-xs font-black tracking-[0.22em] uppercase mb-3">Admissions Open</p>
           <h2 className="text-3xl sm:text-4xl font-black text-[#102a43] mb-4">
             Start Your Nursing Journey With Us
           </h2>
@@ -529,10 +472,7 @@ export default function About() {
         </motion.div>
       </section>
 
-      <ApplyModal
-        open={openApplyModal}
-        onClose={() => setOpenApplyModal(false)}
-      />
+      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
     </div>
   );
 }
