@@ -18,6 +18,9 @@ import Home from './pages/website/Home'
 import About from './pages/website/About'
 import Contact from './pages/website/Contact'
 import Courses from './pages/website/Courses'
+import Facilities from './pages/website/Facilities'
+import WebsiteGallery from './pages/website/Gallery'
+import Placement from './pages/website/Placement'
 
 function WebsiteLayout({ children }) {
   return (
@@ -59,6 +62,9 @@ export default function App() {
           <Route path="/about" element={<WebsiteLayout><About /></WebsiteLayout>} />
           <Route path="/contact" element={<WebsiteLayout><Contact /></WebsiteLayout>} />
           <Route path="/courses" element={<WebsiteLayout><Courses /></WebsiteLayout>} />
+          <Route path="/facilities" element={<WebsiteLayout><Facilities /></WebsiteLayout>} />
+          <Route path="/gallery" element={<WebsiteLayout><WebsiteGallery /></WebsiteLayout>} />
+          <Route path="/placement" element={<WebsiteLayout><Placement /></WebsiteLayout>} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<LoginPage />} />
