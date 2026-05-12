@@ -4,6 +4,8 @@ import { AuthProvider } from './context/AuthContext'
 
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import AdminLayout from './components/admin/AdminLayout'
+import Navbar from './components/Navbar'
+
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
 import GalleryPage from './pages/admin/GalleryPage'
@@ -15,9 +17,17 @@ import Home from './pages/website/Home'
 import About from './pages/website/About'
 import Contact from './pages/website/Contact'
 import Courses from './pages/website/Courses'
-// import Facilities from './pages/website/Facilities'
-// import Gallery from './pages/website/Gallery'
-// import Placement from './pages/website/Placement'
+
+function WebsiteLayout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <main className="pt-20">
+        {children}
+      </main>
+    </>
+  )
+}
 
 export default function App() {
   return (
@@ -41,13 +51,10 @@ export default function App() {
 
         <Routes>
           {/* Website Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/courses" element={<Courses />} />
-          {/* <Route path="/facilities" element={<Facilities />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/placement" element={<Placement />} /> */}
+          <Route path="/" element={<WebsiteLayout><Home /></WebsiteLayout>} />
+          <Route path="/about" element={<WebsiteLayout><About /></WebsiteLayout>} />
+          <Route path="/contact" element={<WebsiteLayout><Contact /></WebsiteLayout>} />
+          <Route path="/courses" element={<WebsiteLayout><Courses /></WebsiteLayout>} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<LoginPage />} />
