@@ -1,3 +1,4 @@
+import ApplyModal from "../../components/ApplyModal";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -24,7 +25,6 @@ import {
   FaBrain,
   FaAmbulance,
 } from "react-icons/fa";
-import Modal from "../../components/ui/Modal";
 
 const courseCards = [
   {
@@ -816,35 +816,7 @@ export default function Courses() {
         </div>
       </section>
 
-     <Modal
-  title="Apply Now"
-  open={openApplyModal}
-  onClose={() => setOpenApplyModal(false)}
->
-  <div className="space-y-4">
-    <input
-      type="text"
-      placeholder="Full Name"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <input
-      type="email"
-      placeholder="Email Address"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <input
-      type="tel"
-      placeholder="Phone Number"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">
-      Submit Application
-    </button>
-  </div>
-</Modal>
+      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
     </div>
   );
 }

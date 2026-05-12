@@ -23,7 +23,7 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import Modal from "../../components/ui/Modal";
+import ApplyModal from "../../components/ApplyModal";
 
 const HERO_VIDEO = "/images/jrp_video.mp4";
 const HERO_FALLBACK = "/images/about.webp";
@@ -150,6 +150,7 @@ export default function Home() {
     setTimeout(() => setFormSubmitted(false), 4000);
     setFormData({ name: "", phone: "", email: "", message: "" });
   };
+  
 
   return (
     <div className="bg-[#f8fbff] overflow-hidden text-slate-800">
@@ -183,7 +184,7 @@ export default function Home() {
               Compassion • Care • Career
             </span>
 
-            <h1 className="mt-6 text-5xl md:text-7xl font-extrabold leading-tight">
+            <h1 className="mt-2 text-2xl md:text-2xl font-extrabold leading-tight">
               Building Skilled <br />
               G.N.M. Nurses <br />
               with Excellence
@@ -230,7 +231,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           FEATURES  (unchanged)
       ══════════════════════════════════════════════ */}
-      <section className="relative z-20 -mt-16 max-w-7xl mx-auto px-6">
+      {/* <section className="relative z-20 -mt-16 max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-6">
           {[
             ["01", "G.N.M. Focused"],
@@ -251,7 +252,260 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-      </section>
+      </section> */}
+      {/* 
+      {/* ======================================================
+    MODERN PREMIUM FEATURES SECTION
+====================================================== */}
+
+<section className="relative z-20 -mt-10 max-w-7xl mx-auto px-6">
+
+  {/* TOP HEADING */}
+  <div className="text-center mb-16">
+
+    <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-6 py-2 rounded-full text-sm font-extrabold tracking-wide uppercase shadow-sm">
+      Excellence in Nursing Education
+    </span>
+
+    <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-blue-950 leading-tight">
+      Empowering Future
+      <br className="hidden sm:block" />
+      Healthcare Professionals
+    </h2>
+
+    <p className="mt-6 text-gray-500 max-w-3xl mx-auto leading-8 text-base md:text-lg">
+      Our nursing college combines practical training, advanced facilities,
+      clinical exposure, and career-focused education to shape confident,
+      skilled, and compassionate healthcare professionals.
+    </p>
+  </div>
+
+  {/* FEATURE GRID */}
+  <div className="grid lg:grid-cols-2 gap-7">
+
+    {[
+      {
+        no: "01",
+        title: "G.N.M. Focused Education",
+        desc: "Professional nursing curriculum designed to build strong healthcare knowledge and practical confidence.",
+        icon: <FaUserNurse />,
+        gradient: "from-blue-700 to-cyan-500",
+        bg: "bg-gradient-to-br from-blue-50 to-cyan-50",
+      },
+
+      {
+        no: "02",
+        title: "Advanced Clinical Training",
+        desc: "Hands-on hospital training with real patient care experience and expert supervision.",
+        icon: <FaHospital />,
+        gradient: "from-green-600 to-emerald-500",
+        bg: "bg-gradient-to-br from-green-50 to-emerald-50",
+      },
+
+      {
+        no: "03",
+        title: "Modern Nursing Laboratories",
+        desc: "State-of-the-art skill labs with advanced nursing simulation and practical learning tools.",
+        icon: <FaFlask />,
+        gradient: "from-purple-600 to-pink-500",
+        bg: "bg-gradient-to-br from-purple-50 to-pink-50",
+      },
+
+      {
+        no: "04",
+        title: "Placement & Career Support",
+        desc: "Career guidance, interview preparation, and placement opportunities after course completion.",
+        icon: <FaHeartbeat />,
+        gradient: "from-orange-500 to-red-500",
+        bg: "bg-gradient-to-br from-orange-50 to-red-50",
+      },
+    ].map((item, index) => (
+
+      <motion.div
+        key={item.title}
+        initial={{ opacity: 0, y: 70 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.15 }}
+        viewport={{ once: true }}
+        className="group"
+      >
+
+        {/* CARD */}
+        <div className={`relative overflow-hidden rounded-[2.8rem] p-8 md:p-10 ${item.bg} border border-white shadow-[0_15px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500 hover:-translate-y-2`}>
+
+          {/* BACKGROUND SHAPE */}
+          <div className={`absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br ${item.gradient} opacity-10 blur-2xl`} />
+
+          {/* TOP ROW */}
+          <div className="relative z-10 flex items-start justify-between">
+
+            {/* ICON */}
+            <div className={`w-20 h-20 rounded-[2rem] bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white text-3xl shadow-2xl group-hover:scale-110 group-hover:rotate-6 transition duration-500`}>
+              {item.icon}
+            </div>
+
+            {/* NUMBER */}
+            <h1 className="text-6xl md:text-7xl font-black text-slate-100 group-hover:scale-105 transition">
+              {item.no}
+            </h1>
+          </div>
+
+          {/* CONTENT */}
+          <div className="relative z-10 mt-10">
+
+            <h3 className="text-2xl md:text-3xl font-black text-blue-950 leading-tight">
+              {item.title}
+            </h3>
+
+            <p className="mt-5 text-gray-600 leading-8">
+              {item.desc}
+            </p>
+
+            {/* BUTTON */}
+            <button className={`mt-8 inline-flex items-center gap-3 bg-gradient-to-r ${item.gradient} text-white px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition`}>
+              Explore More
+              <FaArrowRight />
+            </button>
+          </div>
+
+          {/* BORDER EFFECT */}
+          <div className="absolute inset-0 rounded-[2.8rem] border border-white/50 pointer-events-none" />
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
+{/* ======================================================
+    NOTES BOARD SECTION
+====================================================== */}
+
+<section className="py-24 relative overflow-hidden">
+
+  {/* BACKGROUND */}
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-green-50" />
+
+  <div className="absolute -top-32 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-20" />
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-200 rounded-full blur-3xl opacity-20" />
+
+  <div className="relative z-10 max-w-7xl mx-auto px-6">
+
+    {/* HEADING */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center max-w-3xl mx-auto mb-16"
+    >
+
+      <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-6 py-2 rounded-full text-sm font-extrabold tracking-wide uppercase">
+        Important Updates
+      </span>
+
+      <h2 className="mt-5 text-4xl md:text-5xl font-black text-blue-950 leading-tight">
+       Notice Board
+      </h2>
+
+      <p className="mt-5 text-gray-500 leading-8">
+        Stay updated with admissions, exam schedules, nursing notes,
+        announcements, and important college notifications.
+      </p>
+    </motion.div>
+
+    {/* NOTES GRID */}
+    <div className="grid lg:grid-cols-3 gap-8">
+
+      {[
+        {
+          title: "GNM Nursing Notes",
+          desc: "Download subject-wise nursing notes, PDFs, practical guides, and study materials.",
+          tag: "Study Material",
+          color: "from-blue-600 to-cyan-500",
+        },
+
+        {
+          title: "2026 Admission Notice",
+          desc: "Admissions for GNM Nursing 2026-27 are officially open. Limited seats available.",
+          tag: "Admission Open",
+          color: "from-green-600 to-emerald-500",
+        },
+
+        {
+          title: "Clinical Training Schedule",
+          desc: "Updated hospital posting schedules and practical training batches available now.",
+          tag: "Hospital Training",
+          color: "from-purple-600 to-pink-500",
+        },
+
+      ].map((item, index) => (
+
+        <motion.div
+          key={item.title}
+          initial={{ opacity: 0, y: 70 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.15 }}
+          viewport={{ once: true }}
+          className="group"
+        >
+
+          <div className="relative bg-white rounded-[2.5rem] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.15)] transition-all duration-500 hover:-translate-y-2">
+
+            {/* TOP BAR */}
+            <div className={`h-3 bg-gradient-to-r ${item.color}`} />
+
+            {/* CONTENT */}
+            <div className="p-8">
+
+              {/* TAG */}
+              <div className={`inline-flex bg-gradient-to-r ${item.color} text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg`}>
+                {item.tag}
+              </div>
+
+              {/* TITLE */}
+              <h3 className="mt-6 text-2xl font-black text-blue-950 leading-tight">
+                {item.title}
+              </h3>
+
+              {/* DESCRIPTION */}
+              <p className="mt-5 text-gray-600 leading-8">
+                {item.desc}
+              </p>
+
+              {/* BUTTON */}
+              <button className={`mt-8 inline-flex items-center gap-3 bg-gradient-to-r ${item.color} text-white px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition`}>
+
+                View Details
+                <FaArrowRight />
+              </button>
+            </div>
+
+            {/* CORNER DESIGN */}
+            <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${item.color} opacity-10 blur-2xl`} />
+
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* BOTTOM NOTICE BAR */}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-16"
+    >
+
+      <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-blue-900 to-green-700 p-8 md:p-10 shadow-2xl">
+
+        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full" />
+        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full" />
+
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* ══════════════════════════════════════════════
           ABOUT COLLEGE SECTION  ← NEW
@@ -885,35 +1139,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <Modal
-  title="Apply Now"
-  open={openApplyModal}
-  onClose={() => setOpenApplyModal(false)}
->
-  <div className="space-y-4">
-    <input
-      type="text"
-      placeholder="Full Name"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <input
-      type="email"
-      placeholder="Email Address"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <input
-      type="tel"
-      placeholder="Phone Number"
-      className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-green-600"
-    />
-
-    <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">
-      Submit Application
-    </button>
-  </div>
-</Modal>
+      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
     </div>
   );
 }

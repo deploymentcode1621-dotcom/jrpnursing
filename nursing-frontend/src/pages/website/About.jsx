@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import Modal from "../../components/ui/Modal";
+import ApplyModal from "../../components/ApplyModal";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 45 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
@@ -471,20 +472,7 @@ export default function About() {
         </motion.div>
       </section>
 
-      <Modal
-  title="Apply Now"
-  open={openApplyModal}
-  onClose={() => setOpenApplyModal(false)}
->
-  <div className="space-y-4">
-    <input className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none" placeholder="Full Name" />
-    <input className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none" placeholder="Email Address" />
-    <input className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none" placeholder="Phone Number" />
-    <button className="w-full bg-[#0b5db8] text-white font-bold py-3 rounded-xl">
-      Submit Application
-    </button>
-  </div>
-</Modal>
+      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
     </div>
   );
 }
