@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import AdminLayout from './components/admin/AdminLayout'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
@@ -20,12 +21,15 @@ import Courses from './pages/website/Courses'
 
 function WebsiteLayout({ children }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
       <Navbar />
-      <main className="pt-20">
+
+      <main className="flex-1 pt-20">
         {children}
       </main>
-    </>
+
+      <Footer />
+    </div>
   )
 }
 
