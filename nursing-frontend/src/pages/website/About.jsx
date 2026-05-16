@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import ApplyModal from "../../components/ApplyModal";
+import Modal from "../../components/ui/Modal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 45 },
@@ -472,7 +472,10 @@ export default function About() {
         </motion.div>
       </section>
 
-      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
+     <Modal
+  open={openApplyModal}
+  onClose={() => setOpenApplyModal(false)}
+/>
     </div>
   );
 }

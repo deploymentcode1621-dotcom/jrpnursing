@@ -20,25 +20,13 @@ import {
   FaLeaf,
   FaStar,
   FaQuoteLeft,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 
-import ApplyModal from "../../components/ApplyModal";
+import Modal from "../../components/ui/Modal";
 
 const HERO_VIDEO = "/images/jrp_video.mp4";
 
 const images = {
-  students:
-    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1400&auto=format&fit=crop",
-
-  lab:
-    "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1400&auto=format&fit=crop",
-
-  hospital:
-    "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1400&auto=format&fit=crop",
-
   about:
     "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1400&auto=format&fit=crop",
 
@@ -60,6 +48,7 @@ const testimonials = [
     rating: 5,
     avatar: "PS",
   },
+
   {
     name: "Anjali Patil",
     batch: "GNM Batch 2021",
@@ -68,6 +57,7 @@ const testimonials = [
     rating: 5,
     avatar: "AP",
   },
+
   {
     name: "Sunita Deshmukh",
     batch: "GNM Batch 2023",
@@ -151,142 +141,131 @@ export default function Home() {
   return (
     <div className="bg-[#f8fbff] overflow-hidden text-slate-800">
 
-     {/* =====================================================
-    PREMIUM HERO SECTION
-===================================================== */}
+      {/* =====================================================
+          HERO SECTION
+      ===================================================== */}
 
-<section className="relative min-h-screen overflow-hidden flex items-center">
+      <section className="relative min-h-screen overflow-hidden flex items-center">
 
-  {/* VIDEO */}
-  <video
-    src={HERO_VIDEO}
-    autoPlay
-    loop
-    muted
-    playsInline
-    preload="auto"
-    className="absolute inset-0 w-full h-full object-cover"
-  />
+        <video
+          src={HERO_VIDEO}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-  {/* OVERLAYS */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
-  <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
 
-  {/* HERO CONTENT */}
-  <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-40 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-40 w-full">
 
-    <motion.div
-      initial={{ opacity: 0, y: 70 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9 }}
-      className="max-w-4xl"
-    >
+          <motion.div
+            initial={{ opacity: 0, y: 70 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            className="max-w-4xl"
+          >
 
-      {/* TOP BADGE */}
-      <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xl border border-white/20 px-5 py-2 rounded-full text-white text-xs font-black tracking-widest uppercase">
-        <FaHeartbeat className="text-green-400" />
-        Compassion • Care • Career
-      </span>
+            <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xl border border-white/20 px-5 py-2 rounded-full text-white text-xs font-black tracking-widest uppercase">
+              <FaHeartbeat className="text-green-400" />
+              Compassion • Care • Career
+            </span>
 
-      {/* HEADING */}
-      <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05]">
-        Building Future
-        <br />
-        Healthcare Heroes
-      </h1>
+            <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05]">
+              Building Future
+              <br />
+              Healthcare Heroes
+            </h1>
 
-      {/* DESCRIPTION */}
-      <p className="mt-6 text-blue-50 text-base md:text-lg leading-7 max-w-2xl">
-        Premium nursing education with advanced infrastructure,
-        practical training, clinical excellence, and compassionate care.
-      </p>
+            <p className="mt-6 text-blue-50 text-base md:text-lg leading-7 max-w-2xl">
+              Premium nursing education with advanced infrastructure,
+              practical training, clinical excellence, and compassionate care.
+            </p>
 
-      {/* BUTTONS */}
-      <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
 
-        <button
-          onClick={openModal}
-          className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-2xl inline-flex items-center gap-2 transition"
-        >
-          Apply Now <FaArrowRight />
-        </button>
+              <button
+                onClick={openModal}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-2xl inline-flex items-center gap-2 transition"
+              >
+                Apply Now <FaArrowRight />
+              </button>
 
-        <Link
-          to="/contact"
-          className="bg-white/15 backdrop-blur-xl border border-white/25 text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue-950 transition"
-        >
-          Contact Admission Office
-        </Link>
+              <Link
+                to="/contact"
+                className="bg-white/15 backdrop-blur-xl border border-white/25 text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue-950 transition"
+              >
+                Contact Admission Office
+              </Link>
 
-      </div>
-    </motion.div>
+            </div>
+          </motion.div>
 
-    {/* STATS */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-16 relative z-30">
+          {/* STATS */}
 
-      {[
-        ["33+", "Years of Excellence"],
-        ["1200+", "Nurses Trained"],
-        ["6+", "Hospital Tie-ups"],
-        ["100%", "Career Support"],
-      ].map(([value, label]) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-16 relative z-30">
 
-        <motion.div
-          key={label}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="bg-white/10 backdrop-blur-2xl border border-white/15 rounded-[1.8rem] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
-        >
+            {[
+              ["33+", "Years of Excellence"],
+              ["1200+", "Nurses Trained"],
+              ["6+", "Hospital Tie-ups"],
+              ["100%", "Career Support"],
+            ].map(([value, label]) => (
 
-          <h3 className="text-3xl md:text-4xl font-black text-white">
-            {value}
-          </h3>
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="bg-white/10 backdrop-blur-2xl border border-white/15 rounded-[1.8rem] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
+              >
 
-          <p className="text-blue-100 text-sm mt-2 font-semibold">
-            {label}
-          </p>
+                <h3 className="text-3xl md:text-4xl font-black text-white">
+                  {value}
+                </h3>
 
-        </motion.div>
+                <p className="text-blue-100 text-sm mt-2 font-semibold">
+                  {label}
+                </p>
 
-      ))}
-    </div>
-  </div>
+              </motion.div>
 
-  {/* =====================================================
-      RAISONI STYLE BOTTOM SLOPE
-  ===================================================== */}
+            ))}
+          </div>
+        </div>
 
-  <div
-    className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none"
-    style={{ pointerEvents: "none" }}
-  >
-    <svg
-      className="block w-full h-[120px] md:h-[160px]"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 180"
-      preserveAspectRatio="none"
-    >
-      <path
-        fill="#f8fbff"
-        d="
-          M0,135
-          L160,135
+        {/* BOTTOM CURVE */}
 
-          C220,135 250,100 280,45
-          C310,100 350,135 420,135
+        <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none">
 
-          L1280,135
-          L1440,135
+          <svg
+            className="block w-full h-[120px] md:h-[160px]"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 180"
+            preserveAspectRatio="none"
+          >
 
-          L1440,180
-          L0,180
-          Z
-        "
-      />
-    </svg>
-  </div>
-</section>
+            <path
+              fill="#f8fbff"
+              d="
+                M0,135
+                L160,135
+                C220,135 250,100 280,45
+                C310,100 350,135 420,135
+                L1280,135
+                L1440,135
+                L1440,180
+                L0,180
+                Z
+              "
+            />
+
+          </svg>
+
+        </div>
+      </section>
 
       {/* =====================================================
           FEATURES SECTION
@@ -310,9 +289,11 @@ export default function Home() {
             Our nursing college combines practical training, advanced facilities,
             clinical exposure, and career-focused education.
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-7">
+        </div>
+                {/* FEATURE CARDS */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-12">
 
           {[
             {
@@ -320,8 +301,7 @@ export default function Home() {
               title: "G.N.M. Focused Education",
               desc: "Professional nursing curriculum designed for healthcare excellence.",
               icon: <FaUserNurse />,
-              gradient: "from-blue-700 to-cyan-500",
-              bg: "bg-gradient-to-br from-blue-50 to-cyan-50",
+              gradient: "from-blue-600 to-cyan-500",
             },
 
             {
@@ -330,74 +310,92 @@ export default function Home() {
               desc: "Hands-on hospital training with expert supervision.",
               icon: <FaHospital />,
               gradient: "from-green-600 to-emerald-500",
-              bg: "bg-gradient-to-br from-green-50 to-emerald-50",
             },
 
             {
               no: "03",
-              title: "Modern Nursing Laboratories",
-              desc: "Advanced nursing simulation and practical learning tools.",
+              title: "Modern Nursing Labs",
+              desc: "Advanced simulation and practical nursing tools.",
               icon: <FaFlask />,
               gradient: "from-purple-600 to-pink-500",
-              bg: "bg-gradient-to-br from-purple-50 to-pink-50",
             },
 
             {
               no: "04",
-              title: "Placement & Career Support",
+              title: "Placement Support",
               desc: "Career guidance and placement opportunities for students.",
               icon: <FaHeartbeat />,
               gradient: "from-orange-500 to-red-500",
-              bg: "bg-gradient-to-br from-orange-50 to-red-50",
             },
 
           ].map((item, index) => (
 
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 70 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+              transition={{ duration: 0.55, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="group"
             >
 
-              <div className={`relative overflow-hidden rounded-[2.8rem] p-8 md:p-10 ${item.bg} border border-white shadow-[0_15px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500 hover:-translate-y-2`}>
+              <div className="relative min-h-[340px] overflow-hidden rounded-[2rem] bg-white border border-slate-100 p-6 shadow-[0_12px_35px_rgba(15,23,42,0.06)] hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] hover:-translate-y-2 transition-all duration-500">
 
-                <div className={`absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br ${item.gradient} opacity-10 blur-2xl`} />
+                {/* GLOW */}
 
-                <div className="relative z-10 flex items-start justify-between">
+                <div
+                  className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${item.gradient} opacity-10 blur-3xl`}
+                />
 
-                  <div className={`w-20 h-20 rounded-[2rem] bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white text-3xl shadow-2xl`}>
+                {/* TOP */}
+
+                <div className="relative z-10 flex items-center justify-between">
+
+                  <div
+                    className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white text-xl shadow-lg`}
+                  >
                     {item.icon}
                   </div>
 
-                  <h1 className="text-6xl md:text-7xl font-black text-slate-100">
+                  <span className="text-4xl font-black text-slate-100">
                     {item.no}
-                  </h1>
+                  </span>
 
                 </div>
 
-                <div className="relative z-10 mt-10">
+                {/* CONTENT */}
 
-                  <h3 className="text-2xl md:text-3xl font-black text-blue-950 leading-tight">
+                <div className="relative z-10 mt-7">
+
+                  <h3 className="text-[22px] leading-tight font-black text-blue-950">
                     {item.title}
                   </h3>
 
-                  <p className="mt-5 text-gray-600 leading-8">
+                  <p className="mt-4 text-gray-500 text-[15px] leading-7">
                     {item.desc}
                   </p>
 
-                  <button className={`mt-8 inline-flex items-center gap-3 bg-gradient-to-r ${item.gradient} text-white px-6 py-3 rounded-full font-bold shadow-lg`}>
+                  <button
+                    className={`mt-6 inline-flex items-center gap-2 text-sm font-bold bg-gradient-to-r ${item.gradient} text-white px-4 py-2.5 rounded-full shadow-lg hover:scale-105 transition`}
+                  >
                     Explore More
-                    <FaArrowRight />
+                    <FaArrowRight className="text-xs" />
                   </button>
 
                 </div>
+
+                {/* BOTTOM LINE */}
+
+                <div
+                  className={`absolute bottom-0 left-0 h-[4px] w-full bg-gradient-to-r ${item.gradient}`}
+                />
+
               </div>
+
             </motion.div>
 
           ))}
+
         </div>
       </section>
 
@@ -405,65 +403,78 @@ export default function Home() {
           INFRASTRUCTURE SECTION
       ===================================================== */}
 
-      <section className="py-24 bg-gradient-to-br from-white via-blue-50 to-green-50 relative overflow-hidden">
+      <section className="py-28 bg-gradient-to-br from-[#f8fbff] via-white to-[#eef7ff] relative overflow-hidden">
 
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-200 rounded-full blur-3xl opacity-30" />
+        {/* BACKGROUND GLOW */}
+
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-green-200/40 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
 
+          {/* HEADING */}
+
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-4xl mx-auto mb-20"
           >
 
-            <span className="inline-flex bg-blue-100 text-blue-700 px-6 py-2 rounded-full text-sm font-extrabold tracking-wide uppercase">
+            <span className="inline-flex items-center bg-blue-100 text-blue-700 px-6 py-2 rounded-full text-sm font-extrabold tracking-[0.15em] uppercase">
               Campus Infrastructure
             </span>
 
-            <h2 className="mt-5 text-4xl md:text-6xl font-black text-blue-950">
-              Student Life & Campus Infrastructure
+            <h2 className="mt-6 text-4xl md:text-6xl font-black text-blue-950 leading-[1.1]">
+              Student Life & Modern
+              <br />
+              Campus Experience
             </h2>
 
-            <p className="mt-5 text-gray-500 leading-8">
-              Creating modern spaces for nursing education, practical learning,
-              clinical confidence, discipline, and student well-being.
+            <p className="mt-6 text-gray-500 text-lg leading-8">
+              Advanced infrastructure designed for practical nursing education,
+              student development, and real-world healthcare learning.
             </p>
 
           </motion.div>
 
-          <div className="grid grid-cols-12 gap-4 auto-rows-[230px]">
+          {/* GRID */}
+
+          <div className="grid grid-cols-12 gap-5 auto-rows-[240px]">
 
             {[
               {
-                img: images.students,
+                img: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=1400&auto=format&fit=crop",
                 title: "Student Activities",
+                desc: "Interactive learning and student engagement.",
                 className: "col-span-12 md:col-span-4",
               },
 
               {
-                img: images.lab,
+                img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1400&auto=format&fit=crop",
                 title: "Nursing Skill Lab",
+                desc: "Advanced simulation and practical training.",
                 className: "col-span-12 md:col-span-3",
               },
 
               {
-                img: images.about,
+                img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1400&auto=format&fit=crop",
                 title: "Smart Classrooms",
+                desc: "Modern digital learning environment.",
                 className: "col-span-12 md:col-span-5 md:row-span-2",
               },
 
               {
-                img: images.clinical,
+                img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1400&auto=format&fit=crop",
                 title: "Clinical Practice",
+                desc: "Hands-on clinical exposure and care.",
                 className: "col-span-12 md:col-span-3",
               },
 
               {
-                img: images.hospital,
+                img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1400&auto=format&fit=crop",
                 title: "Hospital Exposure",
+                desc: "Professional hospital training sessions.",
                 className: "col-span-12 md:col-span-4",
               },
 
@@ -473,9 +484,9 @@ export default function Home() {
                 key={item.title}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.12 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`${item.className} group relative overflow-hidden rounded-[2rem] shadow-xl`}
+                className={`${item.className} group relative overflow-hidden rounded-[2.3rem] shadow-[0_15px_50px_rgba(0,0,0,0.12)]`}
               >
 
                 <img
@@ -484,27 +495,32 @@ export default function Home() {
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                <div className="absolute bottom-6 left-6 right-6">
+                <div className="absolute bottom-0 left-0 right-0 p-7">
 
-                  <h3 className="text-white text-2xl font-black">
+                  <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-white text-[11px] font-bold uppercase tracking-wider mb-4">
+                    Premium Campus
+                  </div>
+
+                  <h3 className="text-white text-2xl md:text-3xl font-black leading-tight">
                     {item.title}
                   </h3>
 
-                  <p className="text-blue-100 text-sm mt-2">
-                    Premium facilities for complete nursing growth.
+                  <p className="mt-3 text-blue-100 text-sm leading-7 max-w-sm">
+                    {item.desc}
                   </p>
 
                 </div>
+
               </motion.div>
 
             ))}
+
           </div>
         </div>
       </section>
-
-      {/* =====================================================
+            {/* =====================================================
           EVENTS / GALLERY SECTION
       ===================================================== */}
 
@@ -544,18 +560,21 @@ export default function Home() {
 
             {[
               {
-                image: images.students,
-                title: "Student Engagement Program",
+                image:
+                  "https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1400&auto=format&fit=crop",
+                title: "Hospital Clinical Training",
               },
 
               {
-                image: images.lab,
+                image:
+                  "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1400&auto=format&fit=crop",
                 title: "Nursing Practical Workshop",
               },
 
               {
-                image: images.clinical,
-                title: "Clinical Training Session",
+                image:
+                  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1400&auto=format&fit=crop",
+                title: "Medical Laboratory Practice",
               },
 
             ].map((event, index) => (
@@ -599,6 +618,7 @@ export default function Home() {
               </motion.div>
 
             ))}
+
           </div>
         </div>
       </section>
@@ -644,8 +664,7 @@ export default function Home() {
 
             </div>
           </motion.div>
-
-          <motion.div
+                    <motion.div
             initial={{ opacity: 0, x: 70 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -688,6 +707,7 @@ export default function Home() {
                 </div>
 
               ))}
+
             </div>
 
             <Link
@@ -698,6 +718,7 @@ export default function Home() {
             </Link>
 
           </motion.div>
+
         </div>
       </section>
 
@@ -740,7 +761,9 @@ export default function Home() {
                 className={`bg-gradient-to-br ${f.color} rounded-[2rem] p-7 border ${f.border} shadow-lg hover:-translate-y-2 transition group`}
               >
 
-                <div className={`w-14 h-14 bg-white rounded-2xl flex items-center justify-center ${f.accent} shadow-md mb-5`}>
+                <div
+                  className={`w-14 h-14 bg-white rounded-2xl flex items-center justify-center ${f.accent} shadow-md mb-5`}
+                >
                   {f.icon}
                 </div>
 
@@ -755,18 +778,17 @@ export default function Home() {
               </motion.div>
 
             ))}
+
           </div>
         </div>
       </section>
-
-      {/* =====================================================
+            {/* =====================================================
           CLINICAL TRAINING SECTION
       ===================================================== */}
 
       <section className="py-24 bg-blue-900 relative overflow-hidden">
 
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-800 rounded-full opacity-50" />
-
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-green-900 rounded-full opacity-40" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -812,6 +834,7 @@ export default function Home() {
                   </div>
 
                 ))}
+
               </div>
 
               <button
@@ -829,9 +852,11 @@ export default function Home() {
               viewport={{ once: true }}
               className="relative"
             >
+
               <div className="absolute -inset-4 bg-gradient-to-br from-green-400/30 to-blue-400/30 rounded-[3rem] blur-2xl" />
 
               <div className="relative bg-white/10 backdrop-blur-sm rounded-[3rem] p-4 border border-white/20">
+
                 <img
                   src={images.clinical}
                   alt="Clinical training"
@@ -839,6 +864,7 @@ export default function Home() {
                 />
 
                 <div className="absolute bottom-8 left-8 right-8 bg-blue-900/90 backdrop-blur-xl border border-white/20 rounded-2xl p-5 shadow-xl">
+
                   <h3 className="text-white font-extrabold text-lg">
                     Hospital Training Experience
                   </h3>
@@ -846,6 +872,7 @@ export default function Home() {
                   <p className="text-blue-300 text-sm mt-1">
                     Practical learning with real clinical exposure.
                   </p>
+
                 </div>
               </div>
             </motion.div>
@@ -853,12 +880,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* =====================================================
+            {/* =====================================================
           TESTIMONIALS SECTION
       ===================================================== */}
 
       <section className="py-24 max-w-7xl mx-auto px-6">
+
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -866,6 +893,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
+
           <p className="text-green-600 font-bold uppercase tracking-widest">
             Testimonials
           </p>
@@ -873,10 +901,13 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-blue-900 mt-3">
             What Our Students Say
           </h2>
+
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
+
           {testimonials.map((t, index) => (
+
             <motion.div
               key={t.name}
               initial={{ opacity: 0, y: 50 }}
@@ -885,14 +916,17 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-white rounded-[2rem] p-8 shadow-xl border border-blue-50 hover:-translate-y-2 transition relative"
             >
+
               <FaQuoteLeft className="text-green-100 text-5xl absolute top-6 right-6" />
 
               <div className="flex gap-1 mb-5">
+
                 {Array(t.rating)
                   .fill(0)
                   .map((_, i) => (
                     <FaStar key={i} className="text-yellow-400 text-sm" />
                   ))}
+
               </div>
 
               <p className="text-gray-600 leading-8 text-sm relative z-10">
@@ -900,11 +934,13 @@ export default function Home() {
               </p>
 
               <div className="mt-7 flex items-center gap-4">
+
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-green-500 flex items-center justify-center text-white font-black text-sm shadow-lg">
                   {t.avatar}
                 </div>
 
                 <div>
+
                   <h4 className="font-extrabold text-blue-900">
                     {t.name}
                   </h4>
@@ -916,10 +952,15 @@ export default function Home() {
                   <p className="text-gray-400 text-xs mt-0.5">
                     {t.hospital}
                   </p>
+
                 </div>
+
               </div>
+
             </motion.div>
+
           ))}
+
         </div>
       </section>
 
@@ -928,16 +969,19 @@ export default function Home() {
       ===================================================== */}
 
       <section className="px-6 py-24">
+
         <motion.div
           initial={{ opacity: 0, y: 70 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="relative max-w-6xl mx-auto overflow-hidden rounded-[3rem] bg-gradient-to-r from-green-600 to-blue-800 p-10 md:p-16 text-center shadow-2xl"
         >
+
           <div className="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full" />
           <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-white/10 rounded-full" />
 
           <div className="relative z-10">
+
             <h2 className="text-4xl md:text-6xl font-extrabold text-white">
               Start Your G.N.M. Nursing Career Today
             </h2>
@@ -948,6 +992,7 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex justify-center gap-4 flex-wrap">
+
               <button
                 onClick={openModal}
                 className="bg-white text-blue-900 px-8 py-4 rounded-xl font-bold hover:scale-105 transition"
@@ -961,15 +1006,18 @@ export default function Home() {
               >
                 Contact Us
               </Link>
+
             </div>
           </div>
+
         </motion.div>
       </section>
 
-      <ApplyModal
-        open={openApplyModal}
-        onClose={() => setOpenApplyModal(false)}
-      />
+      <Modal
+  open={openApplyModal}
+  onClose={() => setOpenApplyModal(false)}
+/>
+
     </div>
   );
 }

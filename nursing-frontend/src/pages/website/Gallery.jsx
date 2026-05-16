@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ApplyModal from "../../components/ApplyModal";
+import Modal from "../../components/ui/Modal";
 
 const categories = [
   "All",
@@ -404,7 +404,10 @@ export default function Gallery() {
         </div>
       </section>
 
-      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
+      <ApplyModal
+  open={openApplyModal}
+  onClose={() => setOpenApplyModal(false)}
+/>
 
       <style>{`
         @keyframes fadeUp {

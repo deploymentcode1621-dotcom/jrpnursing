@@ -1,4 +1,4 @@
-import ApplyModal from "../../components/ApplyModal";
+import Modal from "../../components/ui/Modal";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -546,10 +546,10 @@ export default function Contact() {
         </a>
       </div>
 
-      <ApplyModal
-        open={openApplyModal}
-        onClose={() => setOpenApplyModal(false)}
-      />
+     <Modal
+  open={openApplyModal}
+  onClose={() => setOpenApplyModal(false)}
+/>
 
       <style>{`
         .contact-card {
