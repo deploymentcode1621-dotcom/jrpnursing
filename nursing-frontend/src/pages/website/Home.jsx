@@ -30,11 +30,20 @@ import ApplyModal from "../../components/ApplyModal";
 const HERO_VIDEO = "/images/jrp_video.mp4";
 
 const images = {
-  students: "/images/students.png",
-  lab: "/images/nursing lab.png",
-  hospital: "/images/nursing hospital.png",
-  about: "/images/about_img.jpeg",
-  clinical: "/images/clinic.png",
+  students:
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1400&auto=format&fit=crop",
+
+  lab:
+    "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1400&auto=format&fit=crop",
+
+  hospital:
+    "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1400&auto=format&fit=crop",
+
+  about:
+    "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1400&auto=format&fit=crop",
+
+  clinical:
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1400&auto=format&fit=crop",
 };
 
 const fadeUp = {
@@ -142,126 +151,142 @@ export default function Home() {
   return (
     <div className="bg-[#f8fbff] overflow-hidden text-slate-800">
 
-      {/* =====================================================
-          PREMIUM HERO SECTION
-      ===================================================== */}
+     {/* =====================================================
+    PREMIUM HERO SECTION
+===================================================== */}
 
-      <section className="relative min-h-screen overflow-hidden flex items-end">
+<section className="relative min-h-screen overflow-hidden flex items-center">
 
-        {/* VIDEO */}
-        <video
-          src={HERO_VIDEO}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+  {/* VIDEO */}
+  <video
+    src={HERO_VIDEO}
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="auto"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
 
-        {/* OVERLAY */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-blue-950/50 to-black/40" />
-        <div className="absolute inset-0 bg-black/10" />
+  {/* OVERLAYS */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
+  <div className="absolute inset-0 bg-black/10" />
 
-        {/* CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full">
+  {/* HERO CONTENT */}
+  <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-40 w-full">
 
-          <motion.div
-            initial={{ opacity: 0, y: 70 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="max-w-4xl"
-          >
+    <motion.div
+      initial={{ opacity: 0, y: 70 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9 }}
+      className="max-w-4xl"
+    >
 
-            <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xl border border-white/20 px-5 py-2 rounded-full text-white text-xs font-black tracking-widest uppercase">
-              <FaHeartbeat className="text-green-400" />
-              Compassion • Care • Career
-            </span>
+      {/* TOP BADGE */}
+      <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xl border border-white/20 px-5 py-2 rounded-full text-white text-xs font-black tracking-widest uppercase">
+        <FaHeartbeat className="text-green-400" />
+        Compassion • Care • Career
+      </span>
 
-            <h1 className="mt-6 text-5xl md:text-7xl font-black text-white leading-tight">
-              Building Future
-              <br />
-              Healthcare Heroes
-            </h1>
+      {/* HEADING */}
+      <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05]">
+        Building Future
+        <br />
+        Healthcare Heroes
+      </h1>
 
-            <p className="mt-6 text-blue-50 text-lg md:text-xl leading-8 max-w-2xl">
-              Premium nursing education with advanced infrastructure,
-              practical training, clinical excellence, and compassionate care.
-            </p>
+      {/* DESCRIPTION */}
+      <p className="mt-6 text-blue-50 text-base md:text-lg leading-7 max-w-2xl">
+        Premium nursing education with advanced infrastructure,
+        practical training, clinical excellence, and compassionate care.
+      </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+      {/* BUTTONS */}
+      <div className="mt-8 flex flex-wrap gap-4">
 
-              <button
-                onClick={openModal}
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-2xl inline-flex items-center gap-2 transition"
-              >
-                Apply Now <FaArrowRight />
-              </button>
+        <button
+          onClick={openModal}
+          className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold shadow-2xl inline-flex items-center gap-2 transition"
+        >
+          Apply Now <FaArrowRight />
+        </button>
 
-              <Link
-                to="/contact"
-                className="bg-white/15 backdrop-blur-xl border border-white/25 text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue-950 transition"
-              >
-                Contact Admission Office
-              </Link>
+        <Link
+          to="/contact"
+          className="bg-white/15 backdrop-blur-xl border border-white/25 text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue-950 transition"
+        >
+          Contact Admission Office
+        </Link>
 
-            </div>
-          </motion.div>
+      </div>
+    </motion.div>
 
-          {/* STATS — placed before the curve in DOM, z-index above curve */}
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-14"
-            style={{ position: "relative", zIndex: 30 }}
-          >
-            {[
-              ["33+", "Years of Excellence"],
-              ["1200+", "Nurses Trained"],
-              ["6+", "Hospital Tie-ups"],
-              ["100%", "Career Support"],
-            ].map(([value, label]) => (
+    {/* STATS */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-16 relative z-30">
 
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="bg-white/12 backdrop-blur-xl border border-white/15 rounded-[1.7rem] p-5 shadow-xl"
-              >
+      {[
+        ["33+", "Years of Excellence"],
+        ["1200+", "Nurses Trained"],
+        ["6+", "Hospital Tie-ups"],
+        ["100%", "Career Support"],
+      ].map(([value, label]) => (
 
-                <h3 className="text-3xl md:text-4xl font-black text-white">
-                  {value}
-                </h3>
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="bg-white/10 backdrop-blur-2xl border border-white/15 rounded-[1.8rem] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
+        >
 
-                <p className="text-blue-100 text-sm mt-2 font-semibold">
-                  {label}
-                </p>
+          <h3 className="text-3xl md:text-4xl font-black text-white">
+            {value}
+          </h3>
 
-              </motion.div>
+          <p className="text-blue-100 text-sm mt-2 font-semibold">
+            {label}
+          </p>
 
-            ))}
-          </div>
+        </motion.div>
 
-          {/* BOTTOM CURVE — pointer-events: none so it never blocks clicks */}
-          <div
-            className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20"
-            style={{ pointerEvents: "none" }}
-          >
-            <svg
-              className="relative block w-full h-[120px] md:h-[160px]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              preserveAspectRatio="none"
-            >
-              <path
-                fill="#f8fbff"
-                fillOpacity="1"
-                d="M0,256L48,240C96,224,192,192,288,186.7C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-              />
-            </svg>
-          </div>
+      ))}
+    </div>
+  </div>
 
-        </div>
-      </section>
+  {/* =====================================================
+      RAISONI STYLE BOTTOM SLOPE
+  ===================================================== */}
+
+  <div
+    className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none"
+    style={{ pointerEvents: "none" }}
+  >
+    <svg
+      className="block w-full h-[120px] md:h-[160px]"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 180"
+      preserveAspectRatio="none"
+    >
+      <path
+        fill="#f8fbff"
+        d="
+          M0,135
+          L160,135
+
+          C220,135 250,100 280,45
+          C310,100 350,135 420,135
+
+          L1280,135
+          L1440,135
+
+          L1440,180
+          L0,180
+          Z
+        "
+      />
+    </svg>
+  </div>
+</section>
 
       {/* =====================================================
           FEATURES SECTION
