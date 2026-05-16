@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Modal from "../../components/ui/Modal";
+import ApplyModal from "../../components/ApplyModal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -577,10 +577,7 @@ export default function Placement() {
         </div>
       </section>
 
-     <Modal
-  open={openApplyModal}
-  onClose={() => setOpenApplyModal(false)}
-/>
+      <ApplyModal open={openApplyModal} onClose={() => setOpenApplyModal(false)} />
 
       <style>{`
         @keyframes shimmer {

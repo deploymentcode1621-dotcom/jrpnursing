@@ -404,7 +404,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <ApplyModal
+      <Modal
   open={openApplyModal}
   onClose={() => setOpenApplyModal(false)}
 />
