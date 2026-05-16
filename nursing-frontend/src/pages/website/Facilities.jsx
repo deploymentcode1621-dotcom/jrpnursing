@@ -243,133 +243,219 @@ function StatCard({ s, delay }) {
 }
 
 /* ══════════════════════════════════════
-   HERO SECTION — Completely new magazine-editorial design
+   HERO — Dark Photo Collage Background
+   (same style as Courses page hero)
 ══════════════════════════════════════ */
+
+/* Facilities-related Unsplash photos for the collage */
+const heroBgPhotos = [
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=60",   // nursing sim lab
+  "https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=400&q=60",   // computer lab
+  "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=60",   // library
+  "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400&q=60",      // hostel/dorm
+  "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=60",   // smart classroom
+  "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&q=60",   // hospital clinical
+  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=60",      // nurse with patient
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=60",   // hospital corridor
+  "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=400&q=60",      // medical lab
+  "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=400&q=60",   // nursing care
+  "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400&q=60",   // stethoscope
+  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&q=60",   // hospital ward
+];
+
+function PhotoCollageBg() {
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+      {/* 4×3 photo grid */}
+      <div style={{
+        position: "absolute", inset: 0,
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateRows: "repeat(3, 1fr)",
+        gap: "3px",
+        opacity: 0.22,
+        filter: "saturate(0.4) brightness(0.55)",
+      }}>
+        {heroBgPhotos.map((src, i) => (
+          <div key={i} style={{ overflow: "hidden", position: "relative" }}>
+            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+          </div>
+        ))}
+      </div>
+
+      {/* Dark blue-teal overlay — same as Courses hero */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(160deg, rgba(4,30,50,0.88) 0%, rgba(6,42,60,0.82) 30%, rgba(7,55,65,0.80) 60%, rgba(5,35,52,0.90) 100%)",
+      }} />
+
+      {/* Subtle teal glow at center */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(14,165,233,0.10) 0%, transparent 70%)",
+      }} />
+
+      {/* SVG circuit lines */}
+      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 3 }} viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+        <path d="M-100 900 Q400 200 900 400 Q1200 550 1600 100" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.13" fill="none" />
+        <path d="M0 600 Q300 100 800 300 Q1100 450 1500 0" stroke="#38bdf8" strokeWidth="1" opacity="0.10" fill="none" />
+        <line x1="0" y1="180" x2="340" y2="180" stroke="#0ea5e9" strokeWidth="1" opacity="0.14" />
+        <line x1="0" y1="360" x2="280" y2="360" stroke="#0ea5e9" strokeWidth="1" opacity="0.10" />
+        <line x1="120" y1="0" x2="120" y2="900" stroke="#0ea5e9" strokeWidth="1" opacity="0.07" />
+        <circle cx="340" cy="180" r="4" fill="#0ea5e9" opacity="0.25" />
+        <circle cx="280" cy="360" r="3" fill="#0ea5e9" opacity="0.20" />
+        <circle cx="120" cy="540" r="5" fill="#38bdf8" opacity="0.18" />
+        <circle cx="1200" cy="150" r="180" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.10" fill="none" />
+        <circle cx="1200" cy="150" r="130" stroke="#0ea5e9" strokeWidth="1" opacity="0.08" fill="none" />
+        <circle cx="1200" cy="150" r="80" stroke="#0ea5e9" strokeWidth="1" opacity="0.10" fill="none" />
+        <polyline
+          points="0,820 150,820 180,780 210,860 240,795 270,845 300,820 500,820 530,770 560,870 590,790 620,840 650,820 900,820 930,775 960,865 990,800 1020,840 1050,820 1300,820 1330,780 1360,860 1390,810 1440,820"
+          stroke="#0ea5e9" strokeWidth="2" fill="none" opacity="0.16" strokeLinecap="round" strokeLinejoin="round"
+        />
+        <rect x="1330" y="60" width="36" height="120" rx="10" fill="#0ea5e9" opacity="0.09" />
+        <rect x="1290" y="100" width="116" height="36" rx="10" fill="#0ea5e9" opacity="0.09" />
+        <path d="M1380 300 Q1400 370 1380 440 Q1360 510 1380 580" stroke="#38bdf8" strokeWidth="2" fill="none" strokeDasharray="8 5" opacity="0.12" />
+        <path d="M1410 300 Q1390 370 1410 440 Q1430 510 1410 580" stroke="#0ea5e9" strokeWidth="2" fill="none" strokeDasharray="8 5" opacity="0.12" />
+      </svg>
+
+      {/* Bottom fade to page bg */}
+      <div style={{
+        position: "absolute", bottom: 0, left: 0, right: 0, height: "120px",
+        background: "linear-gradient(to top, #f8fafc, transparent)",
+      }} />
+    </div>
+  );
+}
+
 function Hero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouse = e => setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
-
-  const px = (mousePos.x - 0.5) * 18;
-  const py = (mousePos.y - 0.5) * 12;
-
   return (
     <section style={{
       minHeight: "100vh",
-      background: C.gradHero,
-      display: "flex",
-      alignItems: "center",
       position: "relative",
       overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
       paddingTop: "80px",
     }}>
-      {/* Background decorative circles */}
-      <div style={{ position: "absolute", top: "-120px", right: "-80px", width: "600px", height: "600px", borderRadius: "50%", background: "rgba(14,165,233,0.06)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: "400px", height: "400px", borderRadius: "50%", background: "rgba(251,191,36,0.08)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: "30%", left: "50%", width: "200px", height: "200px", borderRadius: "50%", background: "rgba(14,165,233,0.04)", pointerEvents: "none" }} />
+      {/* Dark photo collage background */}
+      <PhotoCollageBg />
 
-      {/* Dot-grid pattern */}
+      {/* Top 3px sky/teal accent line */}
       <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(14,165,233,0.12) 1.5px, transparent 1.5px)",
-        backgroundSize: "32px 32px",
-        maskImage: "radial-gradient(ellipse 70% 70% at 60% 40%, black, transparent)",
+        position: "absolute", top: 0, left: 0, right: 0, height: "3px", zIndex: 30,
+        background: "linear-gradient(to right, #38bdf8, #0ea5e9, #0369a1)",
       }} />
 
-      <div style={{ maxWidth: "1280px", width: "100%", margin: "0 auto", padding: "80px 40px", display: "grid", gridTemplateColumns: "1fr 520px", gap: "60px", alignItems: "center", position: "relative", zIndex: 1 }}>
+      {/* ── CONTENT ── */}
+      <div style={{
+        position: "relative", zIndex: 10,
+        maxWidth: "1280px", width: "100%",
+        margin: "0 auto", padding: "80px 40px",
+        display: "grid",
+        gridTemplateColumns: "1fr 480px",
+        gap: "60px",
+        alignItems: "center",
+      }}>
 
-        {/* LEFT — Editorial Copy */}
+        {/* LEFT — Text content */}
         <div>
-          {/* Breadcrumb */}
+          {/* Top label pill — like gallery reference */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "32px" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: "8px",
+              border: "1px solid rgba(56,189,248,0.4)",
+              borderRadius: "100px", padding: "7px 20px",
+              background: "rgba(255,255,255,0.05)", backdropFilter: "blur(8px)",
+            }}>
+              <span style={{ fontSize: "12px" }}>🏛️</span>
+              <span style={{ color: "#7dd3fc", fontSize: "11px", fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase" }}>World-Class Facilities</span>
+            </div>
+          </div>
+
+          {/* Breadcrumb — white on dark */}
           <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "28px" }}>
-            <Link to="/" style={{ color: C.sky500, textDecoration: "none", fontSize: "13px", fontWeight: 600 }}>Home</Link>
-            <span style={{ color: C.slate300, fontSize: "13px" }}>›</span>
-            <span style={{ color: C.muted, fontSize: "13px" }}>Facilities</span>
+            <Link to="/" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: "13px", fontWeight: 600, transition: "color 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.color = "#7dd3fc"}
+              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.5)"}
+            >Home</Link>
+            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "13px" }}>›</span>
+            <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "13px", fontWeight: 700 }}>Facilities</span>
           </div>
 
-          {/* Eyebrow badge */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "24px" }}>
-            <span style={{
-              background: C.gradGold, color: C.white,
-              fontSize: "10px", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
-              padding: "6px 16px", borderRadius: "100px",
-              boxShadow: "0 4px 16px rgba(245,158,11,0.35)",
-            }}>World-Class Infrastructure</span>
-            <span style={{
-              background: C.sky100, color: C.sky700,
-              fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
-              padding: "6px 16px", borderRadius: "100px",
-              border: `1px solid ${C.sky200}`,
-            }}>Latur, Maharashtra</span>
+          {/* Eyebrow line */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+            <div style={{ height: "3px", width: "40px", borderRadius: "2px", background: "linear-gradient(to right, #38bdf8, #0ea5e9)" }} />
+            <span style={{ color: "#7dd3fc", fontSize: "11px", fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase" }}>Infrastructure & Campus</span>
+            <div style={{ height: "3px", width: "20px", borderRadius: "2px", background: "rgba(56,189,248,0.4)" }} />
           </div>
 
-          {/* Headline — large editorial */}
-          <div style={{ marginBottom: "20px" }}>
+          {/* Headline */}
+          <div style={{ marginBottom: "24px" }}>
             <h1 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(36px, 5.5vw, 76px)",
+              fontSize: "clamp(2.6rem, 5.2vw, 4.4rem)",
               fontWeight: 900, lineHeight: 1.04,
-              margin: 0, color: C.slate900,
+              margin: "0 0 4px", color: "#ffffff",
             }}>
               The Best
             </h1>
             <h1 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(36px, 5.5vw, 76px)",
+              fontSize: "clamp(2.6rem, 5.2vw, 4.4rem)",
               fontWeight: 900, lineHeight: 1.04,
-              margin: 0, color: C.slate900,
+              margin: "0 0 8px",
+              background: "linear-gradient(120deg, #38bdf8 0%, #7dd3fc 50%, #34d399 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontStyle: "italic",
             }}>
-              Nursing{" "}
-              <span style={{
-                background: C.gradSky,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontStyle: "italic",
-              }}>College</span>
+              Nursing College
             </h1>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "8px" }}>
-              <div style={{ height: "4px", width: "80px", background: C.gradGold, borderRadius: "2px" }} />
-              <h2 style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: "clamp(20px, 3vw, 36px)",
-                fontWeight: 700, lineHeight: 1.1,
-                margin: 0, color: C.sky700,
-              }}>in Latur</h2>
-            </div>
+            <h2 style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+              fontWeight: 700, lineHeight: 1.1,
+              margin: 0, color: "rgba(255,255,255,0.75)",
+            }}>
+              in Latur, Maharashtra
+            </h2>
           </div>
 
           {/* Description */}
-          <p style={{ fontSize: "16px", color: C.muted, lineHeight: 1.85, maxWidth: "520px", marginBottom: "36px" }}>
-            Our campus is designed for <strong style={{ color: C.slate700 }}>exceptional education, hands-on training,</strong> and holistic development — with every facility a future nursing professional needs.
+          <p style={{
+            fontSize: "16px", color: "rgba(255,255,255,0.60)",
+            lineHeight: 1.85, maxWidth: "500px", marginBottom: "32px",
+          }}>
+            Our campus is designed for <strong style={{ color: "rgba(255,255,255,0.85)" }}>exceptional education, hands-on training,</strong> and holistic development — with every facility a future nursing professional needs.
           </p>
 
-          {/* Feature pills row */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "40px" }}>
+          {/* Feature pills — glassmorphism on dark */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "36px" }}>
             {[
-              { label: "🔬 Nursing Labs", color: C.sky100, textColor: C.sky800 },
-              { label: "🖥️ Computer Lab", color: C.amber100, textColor: C.amber700 },
-              { label: "📚 Digital Library", color: C.sky100, textColor: C.sky800 },
-              { label: "🛏️ Girls Hostel", color: C.amber100, textColor: C.amber700 },
-              { label: "🏫 Smart Classes", color: C.sky100, textColor: C.sky800 },
-              { label: "🏥 Clinical Training", color: C.amber100, textColor: C.amber700 },
+              { label: "🔬 Nursing Labs",     bg: "rgba(14,165,233,0.15)", border: "rgba(56,189,248,0.35)", color: "#7dd3fc" },
+              { label: "🖥️ Computer Lab",    bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.30)", color: "#fcd34d" },
+              { label: "📚 Digital Library",  bg: "rgba(14,165,233,0.15)", border: "rgba(56,189,248,0.35)", color: "#7dd3fc" },
+              { label: "🛏️ Girls Hostel",    bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.30)", color: "#fcd34d" },
+              { label: "🏫 Smart Classes",    bg: "rgba(14,165,233,0.15)", border: "rgba(56,189,248,0.35)", color: "#7dd3fc" },
+              { label: "🏥 Clinical Training",bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.30)", color: "#fcd34d" },
             ].map(chip => (
               <span key={chip.label} style={{
-                background: chip.color, color: chip.textColor,
+                background: chip.bg, color: chip.color,
                 fontSize: "12px", fontWeight: 700,
                 padding: "7px 16px", borderRadius: "100px",
-                border: `1.5px solid ${chip.textColor === C.sky800 ? C.sky200 : C.amber200}`,
+                border: `1.5px solid ${chip.border}`,
+                backdropFilter: "blur(8px)",
               }}>{chip.label}</span>
             ))}
           </div>
 
           {/* CTA Buttons */}
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "36px" }}>
             <Link to="/contact" style={{
-              background: C.gradSky, color: C.white,
+              background: "linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)",
+              color: "#ffffff",
               fontWeight: 800, padding: "16px 34px", borderRadius: "14px",
               textDecoration: "none", fontSize: "15px",
               boxShadow: "0 8px 28px rgba(14,165,233,0.38)",
@@ -380,7 +466,8 @@ function Hero() {
               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(14,165,233,0.38)"; }}
             >Book Campus Tour →</Link>
             <Link to="/apply" style={{
-              background: C.gradGold, color: C.white,
+              background: "linear-gradient(135deg, #fbbf24 0%, #d97706 100%)",
+              color: "#ffffff",
               fontWeight: 800, padding: "16px 34px", borderRadius: "14px",
               textDecoration: "none", fontSize: "15px",
               boxShadow: "0 8px 24px rgba(245,158,11,0.35)",
@@ -393,107 +480,210 @@ function Hero() {
           </div>
 
           {/* Trust bar */}
-          <div style={{ display: "flex", gap: "28px", marginTop: "40px", paddingTop: "28px", borderTop: `1px solid ${C.border}`, flexWrap: "wrap" }}>
+          <div style={{
+            display: "flex", gap: "28px", paddingTop: "28px",
+            borderTop: "1px solid rgba(255,255,255,0.10)", flexWrap: "wrap",
+          }}>
             {[
               { icon: "✦", text: "INC Affiliated" },
               { icon: "✦", text: "Govt. Recognized" },
               { icon: "✦", text: "Expert Faculty" },
               { icon: "⭐", text: "4.9 / 5.0 Rating" },
             ].map(b => (
-              <span key={b.text} style={{ display: "flex", gap: "6px", alignItems: "center", fontSize: "12px", fontWeight: 700, color: C.sky700 }}>
-                <span style={{ fontSize: "9px", color: C.amber500 }}>{b.icon}</span>{b.text}
+              <span key={b.text} style={{ display: "flex", gap: "6px", alignItems: "center", fontSize: "12px", fontWeight: 700, color: "#7dd3fc" }}>
+                <span style={{ fontSize: "9px", color: "#fcd34d" }}>{b.icon}</span>{b.text}
               </span>
             ))}
           </div>
         </div>
 
-        {/* RIGHT — Floating card mosaic */}
-        <div style={{ position: "relative", height: "560px" }}>
-          {/* Main large card */}
+        {/* RIGHT — Glassmorphism program card (matching Courses page right-side card) */}
+        <div style={{ position: "relative" }}>
+
+          {/* Floating badge top-left */}
           <div style={{
-            position: "absolute", top: "0", right: "0",
-            width: "340px", height: "340px", borderRadius: "28px", overflow: "hidden",
-            boxShadow: "0 24px 64px rgba(14,165,233,0.18)",
-            transform: `translate(${px * 0.3}px, ${py * 0.3}px)`,
-            transition: "transform 0.6s ease",
+            position: "absolute", top: "-20px", left: "-16px", zIndex: 20,
+            background: "rgba(7,31,46,0.90)", backdropFilter: "blur(12px)",
+            borderRadius: "16px", border: "1px solid rgba(56,189,248,0.30)",
+            padding: "12px 18px", boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+            display: "flex", alignItems: "center", gap: "10px",
+            animation: "floatA 3s ease-in-out infinite",
           }}>
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=700&q=80" alt="Nursing Lab"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(7,89,133,0.6) 0%, transparent 50%)" }} />
-            <div style={{ position: "absolute", bottom: "20px", left: "20px", color: C.white }}>
-              <p style={{ margin: 0, fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.8 }}>Nursing Labs</p>
-              <p style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: 900, fontFamily: "'Playfair Display', Georgia, serif" }}>Simulation Center</p>
+            <div style={{ width: "32px", height: "32px", background: "rgba(14,165,233,0.20)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>🔬</div>
+            <div>
+              <p style={{ margin: 0, fontSize: "9px", color: "rgba(255,255,255,0.40)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>Labs</p>
+              <p style={{ margin: 0, fontSize: "12px", fontWeight: 800, color: "#ffffff" }}>15+ Lab Stations</p>
             </div>
           </div>
 
-          {/* Secondary card */}
+          {/* Floating badge bottom-right */}
           <div style={{
-            position: "absolute", bottom: "40px", left: "0",
-            width: "260px", height: "240px", borderRadius: "24px", overflow: "hidden",
-            boxShadow: "0 16px 48px rgba(14,165,233,0.14)",
-            transform: `translate(${px * 0.5}px, ${py * 0.5}px)`,
-            transition: "transform 0.6s ease",
+            position: "absolute", bottom: "-16px", right: "-12px", zIndex: 20,
+            background: "rgba(7,31,46,0.90)", backdropFilter: "blur(12px)",
+            borderRadius: "16px", border: "1px solid rgba(56,189,248,0.30)",
+            padding: "12px 18px", boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+            display: "flex", alignItems: "center", gap: "10px",
+            animation: "floatB 3.6s ease-in-out infinite 0.5s",
           }}>
-            <img src="https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=600&q=80" alt="Computer Lab"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(180,83,9,0.55) 0%, transparent 55%)" }} />
-            <div style={{ position: "absolute", bottom: "16px", left: "16px", color: C.white }}>
-              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", opacity: 0.85 }}>Technology</p>
-              <p style={{ margin: "3px 0 0", fontSize: "17px", fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif" }}>Computer Lab</p>
+            <div style={{ width: "32px", height: "32px", background: "rgba(251,191,36,0.20)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>🏥</div>
+            <div>
+              <p style={{ margin: 0, fontSize: "9px", color: "rgba(255,255,255,0.40)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>Clinical</p>
+              <p style={{ margin: 0, fontSize: "12px", fontWeight: 800, color: "#ffffff" }}>10+ Hospital Tie-ups</p>
             </div>
           </div>
 
-          {/* Tertiary card */}
+          {/* Main glass card */}
           <div style={{
-            position: "absolute", top: "200px", right: "-10px",
-            width: "200px", height: "200px", borderRadius: "20px", overflow: "hidden",
-            boxShadow: "0 12px 36px rgba(14,165,233,0.12)",
-            transform: `translate(${px * 0.7}px, ${py * 0.7}px)`,
-            transition: "transform 0.6s ease",
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(20px)",
+            borderRadius: "2.2rem",
+            border: "1px solid rgba(255,255,255,0.14)",
+            boxShadow: "0 24px 64px rgba(0,0,0,0.40)",
+            overflow: "hidden",
           }}>
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&q=80" alt="Library"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(7,89,133,0.55) 0%, transparent 55%)" }} />
-            <div style={{ position: "absolute", bottom: "14px", left: "14px", color: C.white }}>
-              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", opacity: 0.85 }}>Knowledge</p>
-              <p style={{ margin: "3px 0 0", fontSize: "15px", fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif" }}>Digital Library</p>
+
+            {/* Card banner */}
+            <div style={{
+              position: "relative", overflow: "hidden",
+              padding: "28px",
+              background: "linear-gradient(135deg, #0369a1 0%, #0ea5e9 55%, #075985 100%)",
+            }}>
+              {/* Dot pattern overlay */}
+              <div style={{ position: "absolute", inset: 0, opacity: 0.045 }}>
+                <svg width="100%" height="100%">
+                  <defs>
+                    <pattern id="fdots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                      <circle cx="2" cy="2" r="1.1" fill="white" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#fdots)" />
+                </svg>
+              </div>
+              {/* Rings decoration */}
+              <div style={{ position: "absolute", right: "16px", top: "16px", opacity: 0.09 }}>
+                <svg width="90" height="90" viewBox="0 0 160 160" fill="none">
+                  <circle cx="80" cy="80" r="74" stroke="white" strokeWidth="4" />
+                  <circle cx="80" cy="80" r="54" stroke="white" strokeWidth="3" />
+                  <circle cx="80" cy="80" r="34" stroke="white" strokeWidth="2.5" />
+                  <circle cx="80" cy="80" r="14" fill="white" />
+                </svg>
+              </div>
+
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "16px", marginBottom: "20px" }}>
+                  <div style={{
+                    width: "48px", height: "48px", borderRadius: "16px",
+                    background: "rgba(255,255,255,0.20)", border: "1px solid rgba(255,255,255,0.30)",
+                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0,
+                  }}>🏛️</div>
+                  <div>
+                    <span style={{ fontSize: "9px", fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase", color: "#bae6fd", display: "block", marginBottom: "4px" }}>Campus Infrastructure</span>
+                    <h2 style={{ margin: 0, color: "#ffffff", fontSize: "18px", fontWeight: 900, lineHeight: 1.25, fontFamily: "'Playfair Display', Georgia, serif" }}>
+                      World-Class<br />Nursing Facilities
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Info rows */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  {[
+                    ["Simulation Labs",    "15+ Stations",       "🔬"],
+                    ["Computer Systems",   "50+ Workstations",   "🖥️"],
+                    ["Library Volumes",    "5,000+ Books",       "📚"],
+                    ["Hospital Tie-ups",   "10+ Departments",    "🏥"],
+                  ].map(([label, value, icon]) => (
+                    <div key={label} style={{
+                      display: "flex", justifyContent: "space-between", alignItems: "center",
+                      gap: "12px", borderBottom: "1px solid rgba(255,255,255,0.10)",
+                      paddingBottom: "8px",
+                    }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <span style={{ fontSize: "12px" }}>{icon}</span>
+                        <span style={{ color: "rgba(186,230,253,0.70)", fontSize: "12px" }}>{label}</span>
+                      </div>
+                      <span style={{ color: "#ffffff", fontWeight: 800, fontSize: "12px" }}>{value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Floating badge 1 */}
-          <div style={{
-            position: "absolute", top: "30px", left: "10px",
-            background: C.white, borderRadius: "14px",
-            padding: "12px 18px",
-            boxShadow: "0 8px 32px rgba(14,165,233,0.14)",
-            border: `1px solid ${C.border}`,
-            animation: "floatA 3.5s ease-in-out infinite",
-            zIndex: 10,
-          }}>
-            <p style={{ margin: 0, fontSize: "13px", fontWeight: 800, color: C.slate900 }}>⭐ 4.9 / 5.0</p>
-            <p style={{ margin: "2px 0 0", fontSize: "10px", color: C.muted }}>Student Rating</p>
-          </div>
+            {/* Stat tiles */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px", padding: "16px" }}>
+              {[
+                { val: "6+",   label: "Facilities",  color: "#38bdf8", bg: "rgba(14,165,233,0.15)", border: "rgba(56,189,248,0.25)" },
+                { val: "500+", label: "Students",    color: "#34d399", bg: "rgba(52,211,153,0.12)", border: "rgba(52,211,153,0.25)" },
+                { val: "24/7", label: "Support",     color: "#fcd34d", bg: "rgba(252,211,77,0.12)", border: "rgba(252,211,77,0.25)" },
+              ].map(s => (
+                <div key={s.label} style={{
+                  background: s.bg, border: `1px solid ${s.border}`,
+                  borderRadius: "16px", padding: "12px", textAlign: "center",
+                }}>
+                  <p style={{ margin: 0, fontSize: "20px", fontWeight: 900, color: s.color }}>{s.val}</p>
+                  <p style={{ margin: "4px 0 0", fontSize: "10px", color: "rgba(255,255,255,0.50)", fontWeight: 600 }}>{s.label}</p>
+                </div>
+              ))}
+            </div>
 
-          {/* Floating badge 2 */}
-          <div style={{
-            position: "absolute", top: "360px", left: "260px",
-            background: C.gradGold, borderRadius: "14px",
-            padding: "12px 18px",
-            boxShadow: "0 8px 28px rgba(245,158,11,0.3)",
-            animation: "floatB 4s ease-in-out infinite 0.8s",
-            zIndex: 10,
-          }}>
-            <p style={{ margin: 0, fontSize: "13px", fontWeight: 800, color: C.white }}>👩‍⚕️ 500+ Students</p>
-            <p style={{ margin: "2px 0 0", fontSize: "10px", color: "rgba(255,255,255,0.8)" }}>Enrolled & Growing</p>
+            {/* CTA inside card */}
+            <div style={{ padding: "0 16px 16px" }}>
+              <Link to="/contact" style={{
+                display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                background: "linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)",
+                color: "#ffffff", fontWeight: 800, fontSize: "14px",
+                padding: "14px", borderRadius: "16px", textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(14,165,233,0.25)",
+                transition: "all 0.3s ease", fontFamily: "inherit",
+              }}
+                onMouseEnter={e => e.currentTarget.style.opacity = "0.9"}
+                onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+              >
+                🏛️ Book a Campus Tour →
+              </Link>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Info strip at bottom — same as Courses hero info strip */}
+      <div style={{
+        position: "relative", zIndex: 10,
+        maxWidth: "1280px", width: "100%", margin: "0 auto",
+        padding: "0 40px 40px",
+        display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px",
+      }}>
+        {[
+          { icon: "🔬", label: "Simulation Labs",   value: "15+ Stations",       accent: "#0ea5e9" },
+          { icon: "📚", label: "Library",            value: "5,000+ Books",        accent: "#38bdf8" },
+          { icon: "🛏️", label: "Girls Hostel",      value: "24/7 Secure",         accent: "#34d399" },
+          { icon: "🏥", label: "Hospital Tie-ups",   value: "10+ Departments",     accent: "#fbbf24" },
+        ].map(item => (
+          <div key={item.label} style={{
+            display: "flex", alignItems: "center", gap: "12px",
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(12px)",
+            borderRadius: "16px", padding: "14px 16px",
+            border: "1px solid rgba(255,255,255,0.12)",
+            position: "relative", overflow: "hidden",
+          }}>
+            <div style={{
+              position: "absolute", left: 0, top: 0, bottom: 0, width: "4px",
+              background: item.accent, borderRadius: "16px 0 0 16px",
+            }} />
+            <span style={{ fontSize: "18px", marginLeft: "8px" }}>{item.icon}</span>
+            <div>
+              <p style={{ margin: 0, fontSize: "10px", color: "rgba(255,255,255,0.40)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>{item.label}</p>
+              <p style={{ margin: 0, fontSize: "12px", fontWeight: 800, color: "#ffffff" }}>{item.value}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
 /* ══════════════════════════════════════
-   FACILITY CARD — Full horizontal card with tab indicator
+   FACILITY CARD — unchanged
 ══════════════════════════════════════ */
 function FacilityCard({ f, index }) {
   const [hov, setHov] = useState(false);
@@ -520,10 +710,8 @@ function FacilityCard({ f, index }) {
       <div style={{ order: isEven ? 0 : 1, position: "relative", height: "420px", overflow: "hidden" }}>
         <img src={f.image} alt={f.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease", transform: hov ? "scale(1.07)" : "scale(1)" }} />
-        {/* Dark overlay */}
         <div style={{ position: "absolute", inset: 0, background: isEven ? "linear-gradient(to right, transparent 40%, rgba(248,250,252,0.95) 100%)" : "linear-gradient(to left, transparent 40%, rgba(248,250,252,0.95) 100%)" }} />
 
-        {/* Number watermark */}
         <div style={{
           position: "absolute", top: "20px", [isEven ? "left" : "right"]: "20px",
           fontSize: "72px", fontWeight: 900, lineHeight: 1,
@@ -534,7 +722,6 @@ function FacilityCard({ f, index }) {
           {String(index + 1).padStart(2, "0")}
         </div>
 
-        {/* Tag at bottom */}
         <div style={{
           position: "absolute", bottom: "20px", [isEven ? "left" : "right"]: "20px",
           background: isEven ? C.gradSky : C.gradGold,
@@ -546,7 +733,6 @@ function FacilityCard({ f, index }) {
 
       {/* Content side */}
       <div style={{ order: isEven ? 1 : 0, padding: "52px 48px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        {/* Icon + stat row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
           <div style={{
             width: "56px", height: "56px", borderRadius: "16px",
@@ -562,23 +748,18 @@ function FacilityCard({ f, index }) {
           </div>
         </div>
 
-        {/* Subtitle */}
         <p style={{ margin: "0 0 6px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: f.accentText }}>{f.subtitle}</p>
 
-        {/* Title */}
         <h3 style={{
           margin: "0 0 16px",
           fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 900, lineHeight: 1.2,
           fontFamily: "'Playfair Display', Georgia, serif", color: C.slate900,
         }}>{f.title}</h3>
 
-        {/* Divider */}
         <div style={{ height: "3px", width: "48px", background: isEven ? C.gradSky : C.gradGold, borderRadius: "2px", marginBottom: "16px" }} />
 
-        {/* Description */}
         <p style={{ margin: "0 0 24px", fontSize: "14px", color: C.muted, lineHeight: 1.8 }}>{f.desc}</p>
 
-        {/* Bullet points */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           {f.points.map((pt, pi) => (
             <div key={pi} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
@@ -599,7 +780,7 @@ function FacilityCard({ f, index }) {
 }
 
 /* ══════════════════════════════════════
-   AMENITY CARD
+   AMENITY CARD — unchanged
 ══════════════════════════════════════ */
 function AmenityCard({ e, index }) {
   const [hov, setHov] = useState(false);
@@ -619,9 +800,8 @@ function AmenityCard({ e, index }) {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
     >
-      {/* Top accent line */}
       <div style={{ position: "absolute", top: 0, left: "20px", right: "20px", height: "3px", background: hov ? C.gradSky : C.gradGold, borderRadius: "0 0 4px 4px", transition: "background 0.3s", opacity: hov ? 1 : 0.4 }} />
-      
+
       <div style={{
         width: "56px", height: "56px", borderRadius: "16px", marginBottom: "16px",
         background: hov ? C.sky100 : C.slate100,
@@ -638,7 +818,7 @@ function AmenityCard({ e, index }) {
 }
 
 /* ══════════════════════════════════════
-   MAIN PAGE
+   MAIN PAGE — unchanged except Hero
 ══════════════════════════════════════ */
 export default function Facilities() {
   return (
@@ -660,17 +840,17 @@ export default function Facilities() {
         * { box-sizing: border-box; }
       `}</style>
 
-      {/* ── HERO ── */}
+      {/* ── HERO (replaced) ── */}
       <Hero />
 
-      {/* ── STATS BAND ── */}
+      {/* ── STATS BAND — unchanged ── */}
       <section style={{ background: C.white, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, padding: "40px 40px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }}>
           {stats.map((s, i) => <StatCard key={s.label} s={s} delay={i * 0.1} />)}
         </div>
       </section>
 
-      {/* ── SECTION HEADER ── */}
+      {/* ── SECTION HEADER — unchanged ── */}
       <section style={{ padding: "100px 40px 60px", maxWidth: "1280px", margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "end", marginBottom: "72px" }}>
           <div>
@@ -693,13 +873,13 @@ export default function Facilities() {
           </div>
         </div>
 
-        {/* ── FACILITY CARDS ── */}
+        {/* ── FACILITY CARDS — unchanged ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           {facilities.map((f, i) => <FacilityCard key={f.title} f={f} index={i} />)}
         </div>
       </section>
 
-      {/* ── AMENITIES ── */}
+      {/* ── AMENITIES — unchanged ── */}
       <section style={{ padding: "80px 40px", background: `linear-gradient(180deg, ${C.sky50} 0%, ${C.white} 100%)`, borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
 
@@ -720,7 +900,7 @@ export default function Facilities() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
+      {/* ── FINAL CTA — unchanged ── */}
       <section style={{ padding: "60px 40px 100px" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <div style={{
@@ -731,7 +911,6 @@ export default function Facilities() {
             position: "relative", overflow: "hidden",
             boxShadow: "0 24px 80px rgba(14,165,233,0.32)",
           }}>
-            {/* BG decorations */}
             <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "300px", height: "300px", borderRadius: "50%", background: "rgba(255,255,255,0.06)", pointerEvents: "none" }} />
             <div style={{ position: "absolute", bottom: "-40px", left: "-40px", width: "200px", height: "200px", borderRadius: "50%", background: "rgba(251,191,36,0.15)", pointerEvents: "none" }} />
             <div style={{
@@ -740,7 +919,6 @@ export default function Facilities() {
               backgroundSize: "28px 28px",
             }} />
 
-            {/* Content */}
             <div style={{ position: "relative", zIndex: 1 }}>
               <span style={{ fontSize: "52px", display: "block", marginBottom: "20px", animation: "floatA 3s ease-in-out infinite" }}>🎓</span>
               <h2 style={{
